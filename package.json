@@ -39,7 +39,8 @@
     "gulp-util": "^2.2.20",
     "minimist": "^1.1.0",
     "tiny-lr": "0.0.7",
-    "vinyl-source-stream2": "^0.1.1"
+    "vinyl-source-stream2": "^0.1.1",
+    "moment": "~2.8.3"
   },
   "engines": {
     "node": ">=0.10.0"

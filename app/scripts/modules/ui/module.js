@@ -7,6 +7,9 @@ module.exports = angular
     'showtrackr.data',
     'showtrackr.templates',
     'ui.bootstrap',
+    'ngResource',
+    'ngMessages',
+    'ngCookies',
   ])
   .config(require('./config/route'))
   .controller('IndexController', require('./controllers/index'))

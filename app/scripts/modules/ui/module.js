@@ -12,5 +12,7 @@ module.exports = angular
     'ngCookies',
   ])
   .config(require('./config/route'))
-  .controller('IndexController', require('./controllers/index'))
+  .controller('HomeController', require('./controllers/homeController'))
+  .controller('LoginController', require('./controllers/connect/loginController'))
+  .controller('SignupController', require('./controllers/connect/signupController'))
 ;

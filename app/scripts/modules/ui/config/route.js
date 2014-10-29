@@ -6,10 +6,30 @@
 function RouteConfig($stateProvider, $urlRouterProvider, $locationProvider) {
   // Declare routes
   $stateProvider
-    .state('index', {
+    .state('home', {
       url: '/',
-      templateUrl: 'views/index.html',
-      controller: 'IndexController as vm'
+      templateUrl: 'views/home.html',
+      controller: 'HomeController as vm'
+    })
+    .state('showDetail', {
+      url: '/shows/:id',
+      templateUrl: 'views/detail.html',
+      controller: 'DetailController as vm'
+    })
+    .state('login', {
+      url: '/login',
+      templateUrl: 'views/connect/login.html',
+      controller: 'LoginController as vm'
+    })
+    .state('signup', {
+      url: '/signup',
+      templateUrl: 'views/connect/signup.html',
+      controller: 'SignupController as vm'
+    })
+    .state('add', {
+      url: '/add',
+      templateUrl: 'views/add.html',
+      controller: 'AddController as vm'
     });
   // Default route
   $urlRouterProvider.otherwise('/');

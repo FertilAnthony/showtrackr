@@ -7,7 +7,6 @@ var stream = require('vinyl-source-stream2');
 var env = require('./env');
 var paths = require('./paths');
 var handlers = require('./handlers');
-var moment = require('moment');
 
 module.exports = function() {
   return browserify({

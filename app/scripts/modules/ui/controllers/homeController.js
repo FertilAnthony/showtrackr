@@ -3,7 +3,7 @@
 /**
  * @ngInject
  */
-function IndexController($log, ShowFactory) {
+function IndexController($log, ShowsList) {
   // ViewModel
   var vm = this;
 
@@ -17,8 +17,11 @@ function IndexController($log, ShowFactory) {
     'Romance', 'Sci-Fi', 'Sport', 'Suspense', 'Talk Show', 'Thriller',
     'Travel'];
 
-  /*$log.log(ShowFactory.getShows().query());
-  vm.shows = ShowFactory.getShows().query();*/
+  vm.shows = [];
+  ShowsList.getShowsList().then(function(shows) {
+  	vm.shows = shows;
+  	$log.log(shows);
+  });
 
 }
 

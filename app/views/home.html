@@ -20,14 +20,15 @@
     </div>
     <div class="panel-body">
       <div class="row show-list">
-        <div class="col-xs-4 col-md-3" ng-repeat="show in shows | filter:query | orderBy:'rating':true">
+        <div class="col-xs-4 col-md-3" ng-repeat="show in vm.shows">
           <a href="/shows/{{show._id}}">
-            <img class="img-rounded" ng-src="{{show.poster}}" width="100%"/>
+            {{show.title}}
+            <!-- <img class="img-rounded" ng-src="{{show.poster}}" width="100%"/> -->
           </a>
-          <div class="text-center">
+          <!-- <div class="text-center">
             <a href="/shows/{{show._id}}">{{show.name}}</a>
             <p class="text-muted">Episodes: {{show.episodes.length}}</p>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ function repeatPassword() {
   return {
     require: 'ngModel',
     link: function(scope, elem, attrs, ctrl) {
-      var otherInput = elem.inheritedData("$formController")[attrs.repeatPassword];
+      var otherInput = elem.inheritedData('$formController')[attrs.repeatPassword];
 
       ctrl.$parsers.push(function(value) {
         if (value === otherInput.$viewValue) {

@@ -26,10 +26,10 @@ function RouteConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: 'views/connect/signup.html',
       controller: 'SignupController as vm'
     })
-    .state('add', {
-      url: '/add',
-      templateUrl: 'views/add.html',
-      controller: 'AddController as vm'
+    .state('list', {
+      url: '/list',
+      templateUrl: 'views/list.html',
+      controller: 'ListController as vm'
     });
   // Default route
   $urlRouterProvider.otherwise('/');

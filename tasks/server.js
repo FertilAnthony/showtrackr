@@ -91,39 +91,27 @@ middleware.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 middleware.get('/api/shows', function(req, res, next) {
 	var apiKey = '59b911c4b1f1',
 		shows = [],
-		showsList = {};
+		nbTop = 15,
+		count = 1;
 
 	async.waterfall([
 		function(callback) {
-			request.get('https://api.betaseries.com/shows/search?v=2.3&key=' + apiKey + '&order=followers&nbpp=1', function(error, response, body) {
+
+			request.get('https://api.betaseries.com/shows/search?v=2.3&key=' + apiKey + '&order=followers&nbpp=' + nbTop, function(error, response, body) {
 		        if (error) return next(error);
 
 		        // On parcourt les series pour recuperer les images
 		        shows = JSON.parse(response.body).shows;
+
+				for (var i in shows) {
+					shows[i]['picture'] = 'https://api.betaseries.com/pictures/shows?v=2.3&key=' + apiKey + '&height=313&width=209&id=' + shows[i].id;
+		        }
 		        callback(null, shows);
 		    });
-		},
-		function(shows, callback) {
-			var pictures = [],
-				idShow = null;
-
-			for (var i in shows) {
-				idShow = shows[i].id;
-				request.get('https://api.betaseries.com/shows/pictures?v=2.3&key=' + apiKey + '&order=followers&nbpp=20&id=' + idShow, function(error, response, body) {
-			        if (error) return next(error);
-			        pictures = JSON.parse(response.body).pictures;
-			        // On ajoute l'image a la serie
-			        shows[i]['pictures'] = pictures;
-			        showsList += shows[i];
-			    }); 
-			}
-			callback(null, showsList);
-			
 		}
-	], function (err, showsList) {
-		console.log(showsList);
+	], function (err, shows) {
 		if (err) return next(err);
-		res.send(showsList);
+		res.status(200).send(shows);
 	});
 	
 	/*var query = Show.find();

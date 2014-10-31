@@ -21,14 +21,13 @@
     <div class="panel-body">
       <div class="row show-list">
         <div class="col-xs-4 col-md-3" ng-repeat="show in vm.shows">
-          <a href="/shows/{{show._id}}">
-            {{show.title}}
-            <!-- <img class="img-rounded" ng-src="{{show.poster}}" width="100%"/> -->
+          <a data-ui-sref="showDetail({ id: show.id })">
+            <img class="img-rounded picture" ng-src="{{show.picture}}" width="100%"/>
+            <div class="text-center">
+              <div class="showTitle">{{show.title}}</div>
+              <p class="text-muted showEpisodes">Episodes: {{show.episodes}}</p>
+            </div>
           </a>
-          <!-- <div class="text-center">
-            <a href="/shows/{{show._id}}">{{show.name}}</a>
-            <p class="text-muted">Episodes: {{show.episodes.length}}</p>
-          </div> -->
         </div>
       </div>
     </div>

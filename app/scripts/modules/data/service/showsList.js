@@ -9,12 +9,12 @@ function ShowsListService($q, ShowFactory, $log) {
     var deferred = $q.defer();
 
     function onGetShowsListWithSuccess(response) {
-      var shows = response.shows;
-      
+      var shows = response;
+
       deferred.resolve(shows);
     }
 
-    ShowFactory.getPaginatedShows().get().$promise.then(onGetShowsListWithSuccess, deferred.reject);
+    ShowFactory.getPaginatedShows().query().$promise.then(onGetShowsListWithSuccess, deferred.reject);
 
     return deferred.promise;
   };

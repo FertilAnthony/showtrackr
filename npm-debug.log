@@ -22,7 +22,7 @@
 11 error There is likely additional logging output above.
 12 error System Windows_NT 6.1.7601
 13 error command "c:\\Program Files\\nodejs\\node.exe" "c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "start"
-14 error cwd c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+14 error cwd c:\Users\Administrateur\Mes documents\ANgularJS\showtrackr
 15 error node -v v0.10.32
 16 error npm -v 1.4.28
 17 error code ELIFECYCLE

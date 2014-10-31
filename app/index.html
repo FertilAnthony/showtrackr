@@ -22,8 +22,8 @@
             <li ><a data-ui-sref="list">List</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right" ng-if="!currentUser">
-            <li data-ui-sref="login"><a href="login">Login</a></li>
-            <li data-ui-sref="signup"><a href="signup">Sign up</a></li>
+            <li><a data-ui-sref="login">Login</a></li>
+            <li><a data-ui-sref="signup">Sign up</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right" ng-if="currentUser">
             <li class="navbar-text" ng-bind="currentUser.email"></li>

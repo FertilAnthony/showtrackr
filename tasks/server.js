@@ -92,7 +92,7 @@ var apiKey = '59b911c4b1f1';
 
 middleware.get('/api/shows', function(req, res, next) {
 		var shows = [],
-		nbTop = 15,
+		nbTop = 1,
 		count = 1;
 
 	async.waterfall([
@@ -117,7 +117,8 @@ middleware.get('/api/shows', function(req, res, next) {
 });
 
 middleware.get('/api/shows/:id', function(req, res, next) {
-	var showDetail = [];
+	var showDetail = [],
+		episodes = [];
 
 	async.waterfall([
 		function(callback) {
@@ -125,8 +126,18 @@ middleware.get('/api/shows/:id', function(req, res, next) {
 				if (error) return next(error);
 				showDetail = JSON.parse(response.body).show;
 				showDetail['picture'] = 'https://api.betaseries.com/pictures/shows?v=2.3&key=' + apiKey + '&height=313&width=209&id=' + showDetail.id;
+				callback(null, showDetail);
+				
+			});
+		},
+		function(showDetail, callback) {
+			request.get('https://api.betaseries.com/shows/episodes?v=2.3&key=' + apiKey + '&id=' + showDetail.id, function(error, response, body) {
+				if (error) return next(error);
+				episodes = JSON.parse(response.body).episodes;
+				showDetail['episodesDetail'] = episodes;
 				res.status(200).send(showDetail);
 			});
+			
 		}
 	]);
 });

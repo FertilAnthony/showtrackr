@@ -19,21 +19,19 @@ function ShowsListService($q, ShowFactory, $log) {
     return deferred.promise;
   };
 
-  /*this.getBikeStationById = function getBikeStationById(id) {
+  this.getShownById = function getShownById(id) {
     var deferred = $q.defer();
 
-    function onGetAllBikesStations(stations) {
-      stations.forEach(function (station) {
-        if (id === station.id) {
-          deferred.resolve(station);
-        }
-      });
+     function onGetShowWithSuccess(response) {
+      var shows = response;
+
+      deferred.resolve(shows);
     }
 
-    this.getBikeStations().then(onGetAllBikesStations, deferred.reject);
+    ShowFactory.getPaginatedShows().get({id: id}).$promise.then(onGetShowWithSuccess, deferred.reject);
 
     return deferred.promise;
-  };*/
+  };
 }
 
 module.exports = ShowsListService;

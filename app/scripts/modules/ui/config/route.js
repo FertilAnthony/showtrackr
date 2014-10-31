@@ -12,8 +12,8 @@ function RouteConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       controller: 'HomeController as vm'
     })
     .state('showDetail', {
-      url: '/shows/:id',
-      templateUrl: 'views/detail.html',
+      url: '/show/:id',
+      templateUrl: 'views/showDetail.html',
       controller: 'DetailController as vm'
     })
     .state('login', {
@@ -26,9 +26,9 @@ function RouteConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: 'views/connect/signup.html',
       controller: 'SignupController as vm'
     })
-    .state('list', {
-      url: '/list',
-      templateUrl: 'views/list.html',
+    .state('shows', {
+      url: '/shows',
+      templateUrl: 'views/listShows.html',
       controller: 'ListController as vm'
     });
   // Default route

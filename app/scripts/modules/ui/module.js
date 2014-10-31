@@ -16,4 +16,5 @@ module.exports = angular
   .controller('LoginController', require('./controllers/connect/loginController'))
   .controller('SignupController', require('./controllers/connect/signupController'))
   .directive('repeatPassword', require('./directives/repeatPassword'))
+  .controller('DetailController', require('./controllers/detailController'))
 ;

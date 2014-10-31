@@ -88,16 +88,17 @@ middleware.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 
 //REST routes
+var apiKey = '59b911c4b1f1';
+
 middleware.get('/api/shows', function(req, res, next) {
-	var apiKey = '59b911c4b1f1',
-		shows = [],
+		var shows = [],
 		nbTop = 15,
 		count = 1;
 
 	async.waterfall([
 		function(callback) {
 
-			request.get('https://api.betaseries.com/shows/search?v=2.3&key=' + apiKey + '&order=followers&nbpp=' + nbTop, function(error, response, body) {
+			request.get('https://api.betaseries.com/shows/search?v=2.3&key=' + apiKey + '&order=followers&summary=true&nbpp=' + nbTop, function(error, response, body) {
 		        if (error) return next(error);
 
 		        // On parcourt les series pour recuperer les images
@@ -113,26 +114,21 @@ middleware.get('/api/shows', function(req, res, next) {
 		if (err) return next(err);
 		res.status(200).send(shows);
 	});
-	
-	/*var query = Show.find();
-	if (req.query.genre) {
-		query.where({ genre: req.query.genre });
-	} else if (req.query.alphabet) {
-		query.where({ name: new RegExp('^' + '[' + req.query.alphabet + ']', 'i') });
-	} else {
-		query.limit(12);
-	}
-	query.exec(function(err, shows) {
-	if (err) return next(err);
-		res.send(shows);
-	});*/
 });
 
 middleware.get('/api/shows/:id', function(req, res, next) {
-  Show.findById(req.params.id, function(err, show) {
-    if (err) return next(err);
-    res.send(show);
-  });
+	var showDetail = [];
+
+	async.waterfall([
+		function(callback) {
+			request.get('https://api.betaseries.com/shows/display?v=2.3&key=' + apiKey + '&id=' + req.params.id, function(error, response, body) {
+				if (error) return next(error);
+				showDetail = JSON.parse(response.body).show;
+				showDetail['picture'] = 'https://api.betaseries.com/pictures/shows?v=2.3&key=' + apiKey + '&height=313&width=209&id=' + showDetail.id;
+				res.status(200).send(showDetail);
+			});
+		}
+	]);
 });
 
 

@@ -21,7 +21,7 @@
     <div class="panel-body">
       <div class="row show-list">
         <div class="col-xs-4 col-md-3" ng-repeat="show in vm.shows">
-          <a data-ui-sref="showDetail({ id: show.id })"  popover="{{show.description}}" popover-trigger="mouseenter" popover-title="Résumé">
+          <a data-ui-sref="showDetail({ id: show.id })">
             <img class="img-rounded picture" ng-src="{{show.picture}}" width="100%"/>
           </a>
           <div class="text-center">

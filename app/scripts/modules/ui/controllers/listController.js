@@ -8,7 +8,9 @@ function ListController($log, ShowsList, $stateParams) {
   var vm = this;
 
   vm.shows = [];
-  ShowsList.getPaginatedShowsList($stateParams.pagination).then(function(shows) {
+  vm.currentPage = $stateParams.pagination;
+
+  ShowsList.getPaginatedShowsList(vm.currentPage).then(function(shows) {
     vm.shows = shows;
     $log.log(shows);
   });

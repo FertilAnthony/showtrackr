@@ -1,6 +1,6 @@
 <div class="panel-body">
   <div class="row show-list">
-    <div class="col-md-8 TVshow" ng-repeat="show in vm.shows">
+    <div class="TVshow" ng-repeat="show in vm.shows">
       <a data-ui-sref="showDetail({ id: show.id })">
         <img class="img-rounded poster" ng-src="{{show.picture}}"/>
       </a>

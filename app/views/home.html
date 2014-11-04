@@ -1,32 +1,34 @@
-<div class="jumbotron">
-  <div class="container home">
-    <ul class="alphabet">
-      <li ng-repeat="char in vm.alphabet">
-        <span ng-click="vm.filterByAlphabet(char)">{{char}}</span>
-      </li>
-    </ul>
-    <ul class="genres">
-      <li ng-repeat="genre in vm.genres">
-        <span ng-click="vm.filterByGenre(genre)">{{genre}}</span>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<div class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      {{vm.headingTitle}}
+<div class="home">
+  <div class="jumbotron">
+    <div class="container">
+      <ul class="alphabet">
+        <li ng-repeat="char in vm.alphabet">
+          <span ng-click="vm.filterByAlphabet(char)">{{char}}</span>
+        </li>
+      </ul>
+      <ul class="genres">
+        <li ng-repeat="genre in vm.genres">
+          <span ng-click="vm.filterByGenre(genre)">{{genre}}</span>
+        </li>
+      </ul>
     </div>
-    <div class="panel-body">
-      <div class="row show-list">
-        <div class="col-xs-4 col-md-3" ng-repeat="show in vm.shows">
-          <a data-ui-sref="showDetail({ id: show.id })">
-            <img class="img-rounded picture" ng-src="{{show.picture}}" width="100%"/>
-          </a>
-          <div class="text-center">
-            <div class="showTitle">{{show.title}}</div>
-            <p class="text-muted showEpisodes">Episodes: {{show.episodes}}</p>
+  </div>
+
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        {{vm.headingTitle}}
+      </div>
+      <div class="panel-body">
+        <div class="row show-list">
+          <div class="col-xs-4 col-md-3" ng-repeat="show in vm.shows">
+            <a data-ui-sref="showDetail({ id: show.id })">
+              <img class="img-rounded picture" ng-src="{{show.picture}}" width="100%"/>
+            </a>
+            <div class="text-center infos">
+              <div class="showTitle">{{show.title}}</div>
+              <p class="text-muted showEpisodes">Episodes: {{show.episodes}}</p>
+            </div>
           </div>
         </div>
       </div>

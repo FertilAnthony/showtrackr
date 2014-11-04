@@ -27,7 +27,7 @@ function RouteConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       controller: 'SignupController as vm'
     })
     .state('shows', {
-      url: '/shows',
+      url: '/shows/page/:pagination',
       templateUrl: 'views/listShows.html',
       controller: 'ListController as vm'
     });

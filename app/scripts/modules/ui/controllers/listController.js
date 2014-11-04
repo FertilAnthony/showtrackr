@@ -3,12 +3,12 @@
 /**
  * @ngInject
  */
-function ListController($log, ShowsList) {
+function ListController($log, ShowsList, $stateParams) {
   // ViewModel
   var vm = this;
 
   vm.shows = [];
-  ShowsList.getPaginatedShowsList().then(function(shows) {
+  ShowsList.getPaginatedShowsList($stateParams.pagination).then(function(shows) {
     vm.shows = shows;
     $log.log(shows);
   });

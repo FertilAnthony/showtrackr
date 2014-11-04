@@ -12,9 +12,10 @@ module.exports = angular
     'ngCookies',
   ])
   .config(require('./config/route'))
-  .controller('HomeController', require('./controllers/homeController'))
-  .controller('LoginController', require('./controllers/connect/loginController'))
+  .controller('HomeController',   require('./controllers/homeController'))
+  .controller('LoginController',  require('./controllers/connect/loginController'))
   .controller('SignupController', require('./controllers/connect/signupController'))
-  .directive('repeatPassword', require('./directives/repeatPassword'))
+  .directive('repeatPassword',    require('./directives/repeatPassword'))
   .controller('DetailController', require('./controllers/detailController'))
+  .controller('ListController',   require('./controllers/listController'))
 ;

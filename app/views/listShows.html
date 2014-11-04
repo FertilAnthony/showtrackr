@@ -1,0 +1,13 @@
+<div class="panel-body">
+  <div class="row show-list">
+    <div class="" ng-repeat="show in vm.shows">
+      <a data-ui-sref="showDetail({ id: show.id })">
+        <img class="img-rounded picture" ng-src="{{show.picture}}"/>
+      </a>
+      <div>
+        <div class="showTitle">{{show.title}}</div>
+        <p class="text-muted showEpisodes">Episodes: {{show.episodes}}</p>
+      </div>
+    </div>
+  </div>
+</div>

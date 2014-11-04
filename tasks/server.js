@@ -90,15 +90,39 @@ middleware.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 //REST routes
 var apiKey = '59b911c4b1f1';
 
-middleware.get('/api/shows', function(req, res, next) {
+middleware.get('/api/shows/page/:pagination', function(req, res, next) {
 		var shows = [],
-		nbTop = 1,
-		count = 1;
+		page = req.params.pagination;
+console.log(req);
 
 	async.waterfall([
 		function(callback) {
 
-			request.get('https://api.betaseries.com/shows/search?v=2.3&key=' + apiKey + '&order=followers&summary=true&nbpp=' + nbTop, function(error, response, body) {
+			request.get('https://api.betaseries.com/shows/search?v=2.3&key=' + apiKey + '&order=followers&nbpp=20&page=' + page, function(error, response, body) {
+		        if (error) return next(error);
+
+		        // On parcourt les series pour recuperer les images
+		        shows = JSON.parse(response.body).shows;
+
+				for (var i in shows) {
+					shows[i]['picture'] = 'https://api.betaseries.com/pictures/shows?v=2.3&key=' + apiKey + '&height=313&width=209&id=' + shows[i].id;
+		        }
+		        callback(null, shows);
+		    });
+		}
+	], function (err, shows) {
+		if (err) return next(err);
+		res.status(200).send(shows);
+	});
+});
+
+middleware.get('/api/shows', function(req, res, next) {
+		var shows = [];
+
+	async.waterfall([
+		function(callback) {
+
+			request.get('https://api.betaseries.com/shows/search?v=2.3&key=' + apiKey + '&order=followers&nbpp=12', function(error, response, body) {
 		        if (error) return next(error);
 
 		        // On parcourt les series pour recuperer les images
@@ -118,7 +142,8 @@ middleware.get('/api/shows', function(req, res, next) {
 
 middleware.get('/api/shows/:id', function(req, res, next) {
 	var showDetail = [],
-		episodes = [];
+		episodes = [],
+		listeEpisodes = [];
 
 	async.waterfall([
 		function(callback) {
@@ -131,10 +156,13 @@ middleware.get('/api/shows/:id', function(req, res, next) {
 			});
 		},
 		function(showDetail, callback) {
+			var seasons = [];
+
 			request.get('https://api.betaseries.com/shows/episodes?v=2.3&key=' + apiKey + '&id=' + showDetail.id, function(error, response, body) {
 				if (error) return next(error);
 				episodes = JSON.parse(response.body).episodes;
-				showDetail['episodesDetail'] = episodes;
+
+				showDetail['episodes_details'] = episodes;
 				res.status(200).send(showDetail);
 			});
 			

@@ -3,7 +3,7 @@
 	<div class="description">{{vm.showDetail.description}}</div>
 	<tabset justified="true">
 	    <tab ng-repeat="season in vm.showDetail.seasons_details" heading="Saison {{season.number}}">
-	    	<div ng-repeat="episode in vm.showDetail.episodesDetail">
+	    	<div ng-repeat="episode in vm.showDetail.episodes_details">
 				<div class="well well-lg">{{episode.title}}</div> 
 			</div>
 	    </tab>

@@ -8,7 +8,7 @@ function DetailController($log, ShowsList, $stateParams) {
   var vm = this;
 
   vm.showDetail = [];
-  ShowsList.getShownById($stateParams.id).then(function(showDetail) {
+  ShowsList.getShowById($stateParams.id).then(function(showDetail) {
   	vm.showDetail = showDetail;
   	$log.log(showDetail);
   });

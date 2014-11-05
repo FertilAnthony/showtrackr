@@ -1,6 +1,6 @@
 <div class="panel-body">
   <div class="row show-list">
-    <div class="TVshow" ng-repeat="show in vm.shows">
+    <div class="TVshow col-md-12" ng-repeat="show in vm.shows">
       <a data-ui-sref="showDetail({ id: show.id })">
         <img class="img-rounded poster" ng-src="{{show.picture}}"/>
       </a>
@@ -8,10 +8,12 @@
         <a data-ui-sref="showDetail({ id: show.id })">
           <div class="showTitle">{{show.title}}</div>
         </a>
-        <div class="production">Production {{show.creation}}-</div>
+        <div class="production">
+          <span ng-show="show.status == 'Continuing' ? true: false"><strong>Production:</strong> {{show.creation}} - Aujourd'hui</div>
+          <span ng-show="show.status == 'Ended' ? true: false"><strong>Production:</strong> {{show.creation}} - {{show.endDate}}</div>
         <div class="actors"></div>
         <div class="genres">
-          Genres:
+          <strong>Genres:</strong>
           <span ng-repeat="genre in show.genres">{{genre}}&nbsp;</span>
         </div>
         <div class="description">{{show.description}}</div>

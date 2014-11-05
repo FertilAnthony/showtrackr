@@ -3,7 +3,7 @@
 /**
  * @ngInject
  */
-function IndexController($log, ShowsList) {
+function IndexController($log, topShowsFactory) {
   // ViewModel
   var vm = this;
 
@@ -18,10 +18,10 @@ function IndexController($log, ShowsList) {
     'Travel'];
 
   vm.shows = [];
-  ShowsList.getShowsList().then(function(shows) {
-  	vm.shows = shows;
-  	$log.log(shows);
-  });
+
+  // call resolve route
+  vm.shows = topShowsFactory;
+  $log.log(vm.shows);
 
 }
 

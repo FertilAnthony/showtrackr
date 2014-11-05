@@ -3,15 +3,14 @@
 /**
  * @ngInject
  */
-function DetailController($log, ShowsList, $stateParams) {
+function DetailController($log, showDetailFactory) {
   // ViewModel
   var vm = this;
 
   vm.showDetail = [];
-  ShowsList.getShowById($stateParams.id).then(function(showDetail) {
-  	vm.showDetail = showDetail;
-  	$log.log(showDetail);
-  });
+
+  vm.showDetail = showDetailFactory;
+  $log.log(vm.showDetail);
 
 }
 

@@ -107,6 +107,10 @@ console.log(req);
 
 				for (var i in shows) {
 					shows[i]['picture'] = 'https://api.betaseries.com/pictures/shows?v=2.3&key=' + apiKey + '&height=313&width=209&id=' + shows[i].id;
+		        	
+		        	if (shows[i]['status'] === 'Ended') {
+		        		shows[i]['endDate'] = parseInt(shows[i]['creation'], 10) + parseInt(shows[i]['seasons'], 10);
+		        	}
 		        }
 		        callback(null, shows);
 		    });

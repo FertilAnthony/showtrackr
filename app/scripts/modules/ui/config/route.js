@@ -9,12 +9,22 @@ function RouteConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('home', {
       url: '/',
       templateUrl: 'views/home.html',
-      controller: 'HomeController as vm'
+      controller: 'HomeController as vm',
+      resolve: {
+        topShowsFactory: function(ShowsList) {
+          return ShowsList.getShowsList();
+        }
+      }
     })
     .state('showDetail', {
       url: '/show/:id',
       templateUrl: 'views/showDetail.html',
-      controller: 'DetailController as vm'
+      controller: 'DetailController as vm',
+      resolve: {
+        showDetailFactory: function(ShowsList, $stateParams) {
+          return ShowsList.getShowById($stateParams.id);
+        }
+      }
     })
     .state('login', {
       url: '/login',
@@ -29,7 +39,12 @@ function RouteConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('shows', {
       url: '/shows/page/:pagination',
       templateUrl: 'views/listShows.html',
-      controller: 'ListController as vm'
+      controller: 'ListController as vm',
+      resolve: {
+        listShowsFactory: function(ShowsList, $stateParams) {
+          return ShowsList.getPaginatedShowsList($stateParams.pagination);
+        }
+      }
     });
   // Default route
   $urlRouterProvider.otherwise('/');

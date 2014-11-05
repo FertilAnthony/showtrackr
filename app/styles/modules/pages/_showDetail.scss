@@ -1,9 +1,42 @@
 .showDetail {
+
+	.btn.favoris {
+		transition: 0.5s all;
+		margin-top: 10px;
+		width: 100%;
+		font-size: 15px;
+		max-width: 255px;
+
+		&:before {
+			padding-right: 10px;
+			vertical-align: -1px;
+		}
+
+		.textButton {
+			font-family: 'Arimo', sans-serif;
+		}
+	}
+
+	.picture {
+		margin-left: auto;
+		margin-right: auto;
+	}
 	
-	.character {
-		text-align: center;
+	.details {
+		.title {
+			font-size: 25px;
+			font-weight: 600;
+			margin-bottom: 20px;
+		}
+	}
+	
+	.characters {
+		
+		float: left;
+		margin-top: 100px;
 
 		.character {
+			text-align: center;
 			margin-bottom: 15px;
 		}
 	}

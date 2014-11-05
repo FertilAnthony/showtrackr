@@ -160,7 +160,7 @@ middleware.get('/api/shows/:id', function(req, res, next) {
 				if (error) return next(error);
 
 				showDetail = JSON.parse(response.body).show;
-				showDetail['picture'] = 'https://api.betaseries.com/pictures/shows?v=2.3&key=' + apiKey + '&height=313&width=209&id=' + showId;
+				showDetail['picture'] = 'https://api.betaseries.com/pictures/shows?v=2.3&key=' + apiKey + '&height=380&width=255&id=' + showId;
 				callback(null, showDetail);
 			});
 		},

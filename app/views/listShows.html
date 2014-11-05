@@ -1,12 +1,12 @@
 <div class="panel-body">
   <div class="row show-list">
     <div class="TVshow col-md-12" ng-repeat="show in vm.shows">
-      <div class="col-md-4 col-xs-6 posterLink">
+      <div class="col-md-4 col-xs-6 col-sm-4 posterLink">
         <a data-ui-sref="showDetail({ id: show.id })">
           <img class="img-rounded poster" ng-src="{{show.picture}}"/>
         </a>
       </div>
-      <div class="details col-xs-12 col-sm-6 col-md-8">
+      <div class="details col-xs-12 col-sm-8 col-md-8">
         <a data-ui-sref="showDetail({ id: show.id })">
           <div class="showTitle">{{show.title}}</div>
         </a>

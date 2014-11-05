@@ -1,6 +1,14 @@
 <div class="showDetail">
-	<img class="img-rounded picture" ng-src="{{vm.showDetail.picture}}"/>
-	<div class="description">{{vm.showDetail.description}}</div>
+	<div class="col-md-4 col-xs-4 col-sm-4">
+		<img class="img-rounded picture img-responsive" ng-src="{{vm.showDetail.picture}}"/>
+		<button class="btn btn-success glyphicon glyphicon-heart favoris">
+	    	<span class="textButton">Favoris</span>
+		</button>
+	</div>
+	<div class="details col-xs-12 col-sm-8 col-md-8">
+		<div class="title">{{vm.showDetail.title}}</div>
+		<div class="description">{{vm.showDetail.description}}</div>
+	</div>
 	<!-- <tabset justified="true">
 	    <tab ng-repeat="season in vm.showDetail.seasons_details" heading="Saison {{season.number}}">
 	    	<div ng-repeat="episode in vm.showDetail.episodes_details">

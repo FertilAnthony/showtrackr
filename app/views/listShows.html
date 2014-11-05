@@ -1,22 +1,39 @@
 <div class="panel-body">
   <div class="row show-list">
     <div class="TVshow col-md-12" ng-repeat="show in vm.shows">
-      <a data-ui-sref="showDetail({ id: show.id })">
-        <img class="img-rounded poster" ng-src="{{show.picture}}"/>
-      </a>
-      <div class="details">
+      <div class="col-md-4 col-xs-6 posterLink">
+        <a data-ui-sref="showDetail({ id: show.id })">
+          <img class="img-rounded poster" ng-src="{{show.picture}}"/>
+        </a>
+      </div>
+      <div class="details col-xs-12 col-sm-6 col-md-8">
         <a data-ui-sref="showDetail({ id: show.id })">
           <div class="showTitle">{{show.title}}</div>
         </a>
         <div class="production">
-          <span ng-show="show.status == 'Continuing' ? true: false"><strong>Production:</strong> {{show.creation}} - Aujourd'hui</div>
-          <span ng-show="show.status == 'Ended' ? true: false"><strong>Production:</strong> {{show.creation}} - {{show.endDate}}</div>
+          <span ng-show="show.status == 'Continuing' ? true: false">
+            <strong>Production:</strong> {{show.creation}} - Aujourd'hui
+          </span>
+          <span ng-show="show.status == 'Ended' ? true: false">
+            <strong>Production:</strong> {{show.creation}} - {{show.endDate}}
+          </span>
+        </div>
         <div class="actors"></div>
         <div class="genres">
           <strong>Genres:</strong>
           <span ng-repeat="genre in show.genres">{{genre}}&nbsp;</span>
         </div>
+        <span>Notes:</span> 
+        <rating class="rating" ng-model="show.notes.mean" readonly=true state-on="'glyphicon glyphicon-star'" state-off="'glyphicon glyphicon-star-empty'"></rating>
+        <b>({{show.notes.mean}})</b>
+        <div class="favoris">
+          <button class="btn btn-success glyphicon glyphicon-heart">
+            <span class="textButton">Favoris</span>
+          </button>
+          <div class="followers">{{show.followers}} followers</div>
+        </div>
         <div class="description" data-ng-bind="show.description" data-ellipsis></div>
+        <div class="border"></div>
       </div>
     </div>
   </div>

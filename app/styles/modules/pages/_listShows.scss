@@ -8,17 +8,77 @@
 
 	.details {
 		padding-top: 15px;
+		left: -50px;
+		height: 250px;
+		position: relative;
+
+		.showTitle {
+			font-weight: 600;
+			font-size: 20px;
+			text-transform: uppercase;
+			margin-bottom: 10px;
+			transition: 0.5s all;
+			width: 75%;
+		}
 	}
 
-	.poster {
-		float: left;
-		height: 250px;
-		margin-right: 20px;
+	.posterLink {
+
+		text-align: center;
+
+		.poster {
+			height: 250px;
+		}
 	}
 
 	.description {
 		margin-top: 15px;
 		max-height: 90px;
 		overflow: hidden;
+		bottom: -20px;
+		position: relative;
+		text-align: justify;
+	}
+	
+	.rating {
+		vertical-align: middle;
+		font-size: 15px;
+
+		.glyphicon:before {
+		font-size: 15px;
+		}
+	}
+
+	.favoris {
+
+		float: right;
+
+		.followers {
+			top: 65px;
+			right: 15px;
+			position: absolute;
+			font-weight: 600;
+		}
+
+		.btn {
+			top: -78px;
+			transition: 0.5s all;
+
+			&:before {
+				padding-right: 10px;
+				vertical-align: -1px;
+			}
+
+			.textButton {
+				font-family: 'Arimo', sans-serif;
+			}
+		}
+	}
+
+	.border {
+		border-bottom: 1px solid $text-muted;
+		bottom: 0;
+		width: 96%;
+		position: absolute;
 	}
 }

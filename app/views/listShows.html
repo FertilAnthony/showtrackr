@@ -21,7 +21,9 @@
         <div class="actors"></div>
         <div class="genres">
           <strong>Genres:</strong>
-          <span ng-repeat="genre in show.genres">{{genre}}&nbsp;</span>
+          <span ng-repeat="genre in show.genres">
+            {{genre}}<span ng-hide="$last">,&nbsp;</span>
+          </span>
         </div>
         <span>Notes:</span> 
         <rating class="rating" ng-model="show.notes.mean" readonly=true state-on="'glyphicon glyphicon-star'" state-off="'glyphicon glyphicon-star-empty'"></rating>

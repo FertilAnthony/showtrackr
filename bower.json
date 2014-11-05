@@ -6,8 +6,11 @@
     "angular-bootstrap": "~0.11.2",
     "angular-resource": "~1.3.0",
     "angular-messages": "~1.3.0",
-    "angular-cookies": "~1.3.0"
+    "angular-cookies": "~1.3.0",
+    "angular-ellipsis": ""
   },
-  "devDependencies": {
+  "devDependencies": {},
+  "resolutions": {
+    "angular": "~1.3.0"
   }
 }

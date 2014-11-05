@@ -1,29 +1,139 @@
 0 info it worked if it ends with ok
 1 verbose cli [ 'c:\\Program Files\\nodejs\\node.exe',
 1 verbose cli   'c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
-1 verbose cli   'start' ]
+1 verbose cli   'install' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.32
-4 verbose run-script [ 'prestart', 'start', 'poststart' ]
-5 info prestart showtrackr@0.0.0
-6 verbose unsafe-perm in lifecycle true
-7 info start showtrackr@0.0.0
-8 verbose unsafe-perm in lifecycle true
-9 info showtrackr@0.0.0 Failed to exec start script
-10 error showtrackr@0.0.0 start: `node ./node_modules/gulp/bin/gulp.js`
-10 error Exit status 8
-11 error Failed at the showtrackr@0.0.0 start script.
-11 error This is most likely a problem with the showtrackr package,
-11 error not with npm itself.
-11 error Tell the author that this fails on your system:
-11 error     node ./node_modules/gulp/bin/gulp.js
-11 error You can get their info via:
-11 error     npm owner ls showtrackr
-11 error There is likely additional logging output above.
-12 error System Windows_NT 6.1.7601
-13 error command "c:\\Program Files\\nodejs\\node.exe" "c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "start"
-14 error cwd c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
-15 error node -v v0.10.32
-16 error npm -v 1.4.28
-17 error code ELIFECYCLE
-18 verbose exit [ 1, true ]
+4 warn package.json showtrackr@0.0.0 No repository field.
+5 verbose readDependencies using package.json deps
+6 verbose install where, deps [ 'c:\\Users\\Administrateur\\Mes documents\\AngularJS\\showtrackr',
+6 verbose install   [ 'bower',
+6 verbose install     'browserify',
+6 verbose install     'browserify-ngannotate',
+6 verbose install     'compression',
+6 verbose install     'connect-livereload',
+6 verbose install     'del',
+6 verbose install     'express',
+6 verbose install     'gulp',
+6 verbose install     'gulp-angular-templatecache',
+6 verbose install     'gulp-autoprefixer',
+6 verbose install     'gulp-concat',
+6 verbose install     'gulp-embedlr',
+6 verbose install     'gulp-gh-pages',
+6 verbose install     'gulp-htmlmin',
+6 verbose install     'gulp-jshint',
+6 verbose install     'gulp-livereload',
+6 verbose install     'gulp-plumber',
+6 verbose install     'gulp-rename',
+6 verbose install     'gulp-sass',
+6 verbose install     'gulp-uglify',
+6 verbose install     'gulp-util',
+6 verbose install     'minimist',
+6 verbose install     'tiny-lr',
+6 verbose install     'vinyl-source-stream2',
+6 verbose install     'moment',
+6 verbose install     'bcryptjs',
+6 verbose install     'mongoose',
+6 verbose install     'async',
+6 verbose install     'request',
+6 verbose install     'xml2js',
+6 verbose install     'lodash',
+6 verbose install     'body-parser' ] ]
+7 info preinstall showtrackr@0.0.0
+8 verbose readDependencies using package.json deps
+9 verbose already installed skipping bower@^1.3.12 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+10 verbose already installed skipping browserify@^6.1.0 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+11 verbose already installed skipping browserify-ngannotate@^0.2.0 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+12 verbose already installed skipping compression@^1.1.1 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+13 verbose already installed skipping connect-livereload@^0.4.0 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+14 verbose already installed skipping del@^0.1.3 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+15 verbose already installed skipping express@^4.9.7 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+16 verbose already installed skipping gulp@^3.8.8 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+17 verbose already installed skipping gulp-angular-templatecache@^1.4.2 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+18 verbose already installed skipping gulp-autoprefixer@0.0.7 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+19 verbose already installed skipping gulp-concat@^2.4.1 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+20 verbose already installed skipping gulp-embedlr@^0.5.2 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+21 verbose already installed skipping gulp-gh-pages@^0.4.0 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+22 verbose already installed skipping gulp-htmlmin@^0.2.0 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+23 verbose already installed skipping gulp-jshint@^1.8.5 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+24 verbose already installed skipping gulp-livereload@^1.5.0 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+25 verbose already installed skipping gulp-plumber@^0.6.6 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+26 verbose already installed skipping gulp-rename@^1.2.0 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+27 verbose already installed skipping gulp-sass@^0.7.3 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+28 verbose already installed skipping gulp-uglify@^0.3.2 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+29 verbose already installed skipping gulp-util@^2.2.20 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+30 verbose already installed skipping minimist@^1.1.0 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+31 verbose already installed skipping tiny-lr@0.0.7 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+32 verbose already installed skipping vinyl-source-stream2@^0.1.1 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+33 verbose already installed skipping moment@~2.8.3 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+34 verbose already installed skipping bcryptjs@~2.1.0 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+35 verbose already installed skipping mongoose@~3.8.18 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+36 verbose already installed skipping async@~0.9.0 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+37 verbose already installed skipping request@~2.47.0 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+38 verbose already installed skipping xml2js@~0.4.4 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+39 verbose already installed skipping lodash@~2.4.1 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+40 verbose already installed skipping body-parser@~1.9.2 c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+41 silly resolved []
+42 info build c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+43 verbose linkStuff [ false,
+43 verbose linkStuff   false,
+43 verbose linkStuff   false,
+43 verbose linkStuff   'c:\\Users\\Administrateur\\Mes documents\\AngularJS' ]
+44 info linkStuff showtrackr@0.0.0
+45 verbose linkBins showtrackr@0.0.0
+46 verbose linkMans showtrackr@0.0.0
+47 verbose rebuildBundles showtrackr@0.0.0
+48 verbose rebuildBundles [ '.bin',
+48 verbose rebuildBundles   'async',
+48 verbose rebuildBundles   'bcryptjs',
+48 verbose rebuildBundles   'body-parser',
+48 verbose rebuildBundles   'bower',
+48 verbose rebuildBundles   'browserify',
+48 verbose rebuildBundles   'browserify-ngannotate',
+48 verbose rebuildBundles   'compression',
+48 verbose rebuildBundles   'connect-livereload',
+48 verbose rebuildBundles   'del',
+48 verbose rebuildBundles   'express',
+48 verbose rebuildBundles   'gulp',
+48 verbose rebuildBundles   'gulp-angular-templatecache',
+48 verbose rebuildBundles   'gulp-autoprefixer',
+48 verbose rebuildBundles   'gulp-concat',
+48 verbose rebuildBundles   'gulp-embedlr',
+48 verbose rebuildBundles   'gulp-gh-pages',
+48 verbose rebuildBundles   'gulp-htmlmin',
+48 verbose rebuildBundles   'gulp-jshint',
+48 verbose rebuildBundles   'gulp-livereload',
+48 verbose rebuildBundles   'gulp-plumber',
+48 verbose rebuildBundles   'gulp-rename',
+48 verbose rebuildBundles   'gulp-sass',
+48 verbose rebuildBundles   'gulp-uglify',
+48 verbose rebuildBundles   'gulp-util',
+48 verbose rebuildBundles   'lodash',
+48 verbose rebuildBundles   'minimist',
+48 verbose rebuildBundles   'moment',
+48 verbose rebuildBundles   'mongoose',
+48 verbose rebuildBundles   'request',
+48 verbose rebuildBundles   'tiny-lr',
+48 verbose rebuildBundles   'vinyl-source-stream2',
+48 verbose rebuildBundles   'xml2js' ]
+49 info install showtrackr@0.0.0
+50 info postinstall showtrackr@0.0.0
+51 verbose unsafe-perm in lifecycle true
+52 info showtrackr@0.0.0 Failed to exec postinstall script
+53 error showtrackr@0.0.0 postinstall: `node ./node_modules/bower/bin/bower install`
+53 error Exit status 1
+54 error Failed at the showtrackr@0.0.0 postinstall script.
+54 error This is most likely a problem with the showtrackr package,
+54 error not with npm itself.
+54 error Tell the author that this fails on your system:
+54 error     node ./node_modules/bower/bin/bower install
+54 error You can get their info via:
+54 error     npm owner ls showtrackr
+54 error There is likely additional logging output above.
+55 error System Windows_NT 6.1.7601
+56 error command "c:\\Program Files\\nodejs\\node.exe" "c:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install"
+57 error cwd c:\Users\Administrateur\Mes documents\AngularJS\showtrackr
+58 error node -v v0.10.32
+59 error npm -v 1.4.28
+60 error code ELIFECYCLE
+61 verbose exit [ 1, true ]

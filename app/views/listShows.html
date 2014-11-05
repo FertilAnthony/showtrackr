@@ -16,7 +16,7 @@
           <strong>Genres:</strong>
           <span ng-repeat="genre in show.genres">{{genre}}&nbsp;</span>
         </div>
-        <div class="description">{{show.description}}</div>
+        <div class="description" data-ng-bind="show.description" data-ellipsis></div>
       </div>
     </div>
   </div>

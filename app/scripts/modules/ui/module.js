@@ -10,6 +10,7 @@ module.exports = angular
     'ngResource',
     'ngMessages',
     'ngCookies',
+    'dibari.angular-ellipsis',
   ])
   .config(require('./config/route'))
   .controller('HomeController',   require('./controllers/homeController'))

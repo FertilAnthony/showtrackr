@@ -8,8 +8,10 @@ function NavbarController($log, AuthService) {
   var vm = this;
 
   vm.logout = function() {
+  	$log.log("pass inside");
   	AuthService.logout();
   }
+  $log.log(vm);
 }
 
 module.exports = NavbarController;

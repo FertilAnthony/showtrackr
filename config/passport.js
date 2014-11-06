@@ -48,6 +48,7 @@ module.exports = function(passport) {
 
                 // check to see if theres already a user with that email
                 if (user) {
+                    console.log('email deja existant');
                     return next(null, false, req.flash('signupMessage', 'Cet email est déjà pris.'));
                 } else {
 

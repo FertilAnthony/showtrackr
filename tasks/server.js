@@ -15,7 +15,10 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
 var morgan = require('morgan');
+var moment = require('moment');
+var jwt = require('jwt-simple');
 
+var tokenSecret = 'your unique secret';
 
 // Connect to database
 mongoose.connect('mongodb://localhost/showtrackr', function(err) {
@@ -39,6 +42,34 @@ middleware.use(session({ secret: 'Pa$$w0rd' })); // session secret
 middleware.use(passport.initialize());
 middleware.use(passport.session()); // persistent login sessions
 middleware.use(flash()); // use connect-flash for flash messages stored in session
+
+function ensureAuthenticated(req, res, next) {
+	if (req.headers.authorization) {
+		var token = req.headers.authorization.split(' ')[1];
+		try {
+			var decoded = jwt.decode(token, tokenSecret);
+			if (decoded.exp <= Date.now()) {
+				res.send(400, 'Access token has expired');
+			} else {
+				req.user = decoded.user;
+				return next();
+			}
+		} catch (err) {
+			return res.send(500, 'Error parsing token');
+		}
+	} else {
+		return res.send(401);
+	}
+}
+
+function createJwtToken(user) {
+	var payload = {
+		user: user,
+		iat: new Date().getTime(),
+		exp: moment().add(7, 'days').valueOf()
+	};
+	return jwt.encode(payload, tokenSecret);
+}
 
 //REST routes
 var apiKey = '59b911c4b1f1';
@@ -144,9 +175,17 @@ middleware.get('/api/shows/:id', function(req, res, next) {
 
 // process the signup form
 middleware.post('/auth/signup', passport.authenticate('local-signup', { 
-	successFlash: 'Welcome!' ,
+	successFlash: 'Welcome!',
 	failureFlash: true
-}));
+}),
+function(req, res) {
+	var user = req.user;
+	var token = createJwtToken(user);
+	res.status(200).send({token: token});
+});
+
+// Process login form
+middleware.post('/auth/login');
 
 // Redirect route
 /*middleware.get('*', function(req, res) {

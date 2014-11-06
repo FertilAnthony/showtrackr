@@ -33,7 +33,7 @@ function AuthService($log, $http, $location, $rootScope, $window) {
 	}
 
 	this.logout = function logout() {
-		$log.log('test');
+		$log.log('logout');
 		delete $window.localStorage.token;
 		$rootScope.currentUser = null;
 		$location.path('/');

@@ -8,7 +8,6 @@ function SignupController($log, AuthService) {
   var vm = this;
 
   vm.signup = function() {
-  	$log.log(vm);
   	AuthService.signup({
   		email: vm.email,
   		password: vm.password

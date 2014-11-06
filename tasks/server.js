@@ -83,7 +83,6 @@ middleware.get('/api/shows/page/:pagination', function(req, res, next) {
 		function(callback) {
 
 			request.get('https://api.betaseries.com/shows/search?v=2.3&key=' + apiKey + '&order=followers&nbpp=20&page=' + page, function(error, response, body) {
-		        console.log(error);
 		        if (error) return next(error);
 
 		        // On parcourt les series pour recuperer les images

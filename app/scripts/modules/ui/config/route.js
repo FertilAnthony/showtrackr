@@ -28,12 +28,12 @@ function RouteConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     })
     .state('login', {
       url: '/login',
-      templateUrl: 'views/connect/login.html',
+      templateUrl: 'views/auth/login.html',
       controller: 'LoginController as vm'
     })
     .state('signup', {
       url: '/signup',
-      templateUrl: 'views/connect/signup.html',
+      templateUrl: 'views/auth/signup.html',
       controller: 'SignupController as vm'
     })
     .state('shows', {

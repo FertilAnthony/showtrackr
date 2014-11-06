@@ -14,9 +14,10 @@ module.exports = angular
   ])
   .config(require('./config/route'))
   .controller('HomeController',   require('./controllers/homeController'))
-  .controller('LoginController',  require('./controllers/connect/loginController'))
-  .controller('SignupController', require('./controllers/connect/signupController'))
+  .controller('LoginController',  require('./controllers/auth/loginController'))
+  .controller('SignupController', require('./controllers/auth/signupController'))
   .directive('repeatPassword',    require('./directives/repeatPassword'))
   .controller('DetailController', require('./controllers/detailController'))
   .controller('ListController',   require('./controllers/listController'))
+  .controller('NavbarController', require('./controllers/navbarController'))
 ;

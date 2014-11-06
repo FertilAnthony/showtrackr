@@ -9,83 +9,36 @@ var bcrypt = require('bcryptjs');
 var mongoose = require('mongoose');
 var async = require('async');
 var request = require('request');
-var xml2js = require('xml2js');
 var _ = require('lodash');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+var flash = require('connect-flash');
+var session = require('express-session');
+var morgan = require('morgan');
 
+
+// Connect to database
 mongoose.connect('mongodb://localhost/showtrackr', function(err) {
   if (err) { throw err; }
 });
 
-var showSchema = new mongoose.Schema({
-	_id: Number,
-	name: String,
-	airsDayOfWeek: String,
-	airsTime: String,
-	firstAired: Date,
-	genre: [String],
-	network: String,
-	overview: String,
-	rating: Number,
-	ratingCount: Number,
-	status: String,
-	poster: String,
-	subscribers: [{
-		type: mongoose.Schema.Types.ObjectId, ref: 'User'
-	}],
-	episodes: [{
-		season: Number,
-		episodeNumber: Number,
-		episodeName: String,
-		firstAired: Date,
-		overview: String
-	}]
-});
 
-var userSchema = new mongoose.Schema({
-	name: { type: String, trim: true, required: true },
-	email: { type: String, unique: true, lowercase: true, trim: true },
-	password: String,
-	facebook: {
-		id: String,
-		email: String
-	},
-	google: {
-		id: String,
-		email: String
-	}
-});
-
-userSchema.pre('save', function(next) {
-	var user = this;
-	if (!user.isModified('password')) return next();
-	bcrypt.genSalt(10, function(err, salt) {
-		if (err) return next(err);
-		bcrypt.hash(user.password, salt, function(err, hash) {
-			if (err) return next(err);
-			user.password = hash;
-			next();
-		});
-	});
-});
-
-userSchema.methods.comparePassword = function(candidatePassword, cb) {
-	bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-		if (err) return cb(err);
-		cb(null, isMatch);
-	});
-};
-
-var User = mongoose.model('User', userSchema);
-var Show = mongoose.model('Show', showSchema);
+require('../config/passport')(passport); // pass passport for configuration
 
 // Set up an express server (not starting it yet)
 var middleware = express();
 
+middleware.use(morgan('dev')); // log every request to the console
 middleware.use(bodyParser.json());       // to support JSON-encoded bodies
 middleware.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
+
+// required for passport
+middleware.use(session({ secret: 'Pa$$w0rd' })); // session secret
+middleware.use(passport.initialize());
+middleware.use(passport.session()); // persistent login sessions
+middleware.use(flash()); // use connect-flash for flash messages stored in session
 
 //REST routes
 var apiKey = '59b911c4b1f1';
@@ -94,7 +47,6 @@ var apiKey = '59b911c4b1f1';
 middleware.get('/api/shows/page/:pagination', function(req, res, next) {
 		var shows = [],
 		page = req.params.pagination;
-console.log(req);
 
 	async.waterfall([
 		function(callback) {
@@ -171,24 +123,30 @@ middleware.get('/api/shows/:id', function(req, res, next) {
 
 				characters = JSON.parse(response.body).characters;
 				showDetail['characters'] = characters;
-				res.status(200).send(showDetail);
+				callback(null, showDetail);
 			});
-		}
-		/*function(showDetail, callback) {
+		},
+		// Récupération de tous les episodes
+		function(showDetail, callback) {
 			var seasons = [];
 
 			request.get('https://api.betaseries.com/shows/episodes?v=2.3&key=' + apiKey + '&id=' + showDetail.id, function(error, response, body) {
 				if (error) return next(error);
-				episodes = JSON.parse(response.body).episodes;
 
+				episodes = JSON.parse(response.body).episodes;
 				showDetail['episodes_details'] = episodes;
 				res.status(200).send(showDetail);
 			});
 			
-		}*/
+		}
 	]);
 });
 
+// process the signup form
+middleware.post('/auth/signup', passport.authenticate('local-signup', { 
+	successFlash: 'Welcome!' ,
+	failureFlash: true
+}));
 
 // Redirect route
 /*middleware.get('*', function(req, res) {
@@ -198,7 +156,7 @@ middleware.get('/api/shows/:id', function(req, res, next) {
 // Error route
 middleware.use(function(err, req, res, next) {
   console.error(err.stack);
-  res.send(500, { message: err.message });
+  res.status(500).send(err.message);
 });
 
 // Compression gzip

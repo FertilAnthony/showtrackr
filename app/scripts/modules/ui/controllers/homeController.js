@@ -21,7 +21,6 @@ function IndexController($log, topShowsFactory) {
 
   // call resolve route
   vm.shows = topShowsFactory;
-  $log.log(vm.shows);
 
 }
 

@@ -34,7 +34,7 @@ module.exports = function(passport) {
         passwordField : 'password',
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
-    function(req, email, password, next) {
+    function(req, email, username, password, next) {
 
         // asynchronous
         // User.findOne wont fire unless data is sent back
@@ -49,14 +49,14 @@ module.exports = function(passport) {
                 // check to see if theres already a user with that email
                 if (user) {
                     console.log('email deja existant');
-                    return next(null, false, req.flash('signupMessage', 'Cet email est déjà pris.'));
+                    req.flash('signupMessage', 'Cet email est déjà pris.');
                 } else {
-
+console.log('passport');
                     // if there is no user with that email
                     // create the user
                     var newUser = new User({
                         // set the user's local credentials
-                        name: '',
+                        username: username,
                         email: email,
                         password: password
                     });

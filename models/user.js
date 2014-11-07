@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
 var userSchema = new mongoose.Schema({
-	name: { type: String, trim: true },
+	username: { type: String, trim: true, required: true },
 	email: { type: String, unique: true, lowercase: true, trim: true },
 	password: String,
 	facebook: {
@@ -28,7 +28,7 @@ var userSchema = new mongoose.Schema({
 // encrypt password before save
 userSchema.pre('save', function(next) {
 	var user = this;
-	console.log(user);
+
 	if (!user.isModified('password')) return next();
 	bcrypt.genSalt(10, function(err, salt) {
 		if (err) return next(err);

@@ -14,8 +14,6 @@ function ListController($log, listShowsFactory) {
   });
   
   vm.shows = listShowsFactory;
-
-  $log.log(vm.shows);
 }
 
 module.exports = ListController;

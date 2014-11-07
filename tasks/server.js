@@ -17,8 +17,11 @@ var session = require('express-session');
 var morgan = require('morgan');
 var moment = require('moment');
 var jwt = require('jwt-simple');
+var cookieParser = require('cookie-parser');
+var mongoStore = require('connect-mongo')(session);
 
 var tokenSecret = 'your unique secret';
+var User = require('../models/user');
 
 // Connect to database
 mongoose.connect('mongodb://localhost/showtrackr', function(err) {
@@ -37,39 +40,19 @@ middleware.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
+// cookieParser should be above session
+middleware.use(cookieParser());
+
 // required for passport
-middleware.use(session({ secret: 'Pa$$w0rd' })); // session secret
+middleware.use(session({ // express/mongo session storage
+	secret: 'Pa$$w0rd',
+	store: new mongoStore({
+		url: 'mongodb://localhost/showtrackr'
+	})
+}));
 middleware.use(passport.initialize());
 middleware.use(passport.session()); // persistent login sessions
 middleware.use(flash()); // use connect-flash for flash messages stored in session
-
-function ensureAuthenticated(req, res, next) {
-	if (req.headers.authorization) {
-		var token = req.headers.authorization.split(' ')[1];
-		try {
-			var decoded = jwt.decode(token, tokenSecret);
-			if (decoded.exp <= Date.now()) {
-				res.send(400, 'Access token has expired');
-			} else {
-				req.user = decoded.user;
-				return next();
-			}
-		} catch (err) {
-			return res.send(500, 'Error parsing token');
-		}
-	} else {
-		return res.send(401);
-	}
-}
-
-function createJwtToken(user) {
-	var payload = {
-		user: user,
-		iat: new Date().getTime(),
-		exp: moment().add(7, 'days').valueOf()
-	};
-	return jwt.encode(payload, tokenSecret);
-}
 
 //REST routes
 var apiKey = '59b911c4b1f1';
@@ -174,18 +157,44 @@ middleware.get('/api/shows/:id', function(req, res, next) {
 });
 
 // process the signup form
-middleware.post('/auth/signup', passport.authenticate('local-signup', { 
-	successFlash: 'Welcome!',
-	failureFlash: true
-}),
-function(req, res) {
-	var user = req.user;
-	var token = createJwtToken(user);
-	res.status(200).send({token: token});
+middleware.post('/auth/users', function(req, res, next) {
+	var user = new User(req.body);
+
+	user.save(function(err) {
+		if (err) res.status(400).send(err);
+
+		req.logIn(user, function(err) {
+			if (err) return next(err);
+			req.flash('Votre compte compte à bien été crée.\n Bienvenue ' + user.username);
+			res.status(200).send(user.user_info);
+		});
+	});	
 });
 
 // Process login form
-middleware.post('/auth/login');
+middleware.post('/auth/login', passport.authenticate('local-signup', { 
+	successFlash: 'Welcome!',
+	failureFlash: true
+}));
+
+middleware.get('/auth/session', ensureAuthenticated, function(req, res) {
+	res.status(200).send(req.user.user_info);
+});
+
+// Route middleware to ensure user is authenticated
+function ensureAuthenticated(req, res, next) {
+	if (req.isAuthenticated()) { return next(); }
+	res.send(401);
+}
+
+middleware.del('/auth/logout', function(req, res) {
+	if(req.user) {
+		req.logout();
+		res.status(200).send();
+	} else {
+		res.status(400).send("Not logged in");
+	}
+});
 
 // Redirect route
 /*middleware.get('*', function(req, res) {
@@ -208,7 +217,11 @@ middleware.use(livereload({
 middleware.use(express.static('./dist'));
 // Push State implementation
 middleware.all('/*', function(request, response) {
-  response.sendFile('index.html', { root: 'dist' });
+	console.log(request.user);
+	if(request.user) {
+		response.cookie('user', JSON.stringify(request.user.user_info));
+	}
+  	response.sendFile('index.html', { root: 'dist' });
 });
 
 

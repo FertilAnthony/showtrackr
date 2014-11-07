@@ -3,25 +3,19 @@
 /**
  * @ngInject
  */
-function AuthService($log, $http, $location, $rootScope, $window) {
+function AuthService($log, $http, $location, $rootScope, $cookieStore, UserFactory) {
+	$rootScope.currentUser = $cookieStore.get('user') || null;
+	$cookieStore.remove('user');	
 
-	var token = $window.localStorage.token;
-	if (token) {
-		var payload = JSON.parse($window.atob(token.split('.')[1]));
-		$rootScope.currentUser = payload.user;
-	}
+	this.signup = function signup(userinfo, callback) {
+		var cb = callback || angular.noop;
 
-	this.signup = function signup(user) {
-		$log.log(user);
-		return $http.post('/auth/signup', user).success(function(data) {
-			 $window.localStorage.token = data.token;
-			var payload = JSON.parse($window.atob(data.token.split('.')[1]));
-			$rootScope.currentUser = payload.user;
-			$location.path('/');
-			$log.log(data);
-		})
-		.error(function(response) {
-			$log.log(response);
+		UserFactory.auth().save(userinfo, function(user) {
+			$rootScope.currentUser = user;
+			return cb();
+		},
+		function(err) {
+			return cb(err.data);
 		});
 	};
 
@@ -30,13 +24,25 @@ function AuthService($log, $http, $location, $rootScope, $window) {
 			$location.path('/');
 			$log.log(data);
 		});
-	}
+	};
 
-	this.logout = function logout() {
-		$log.log('logout');
-		delete $window.localStorage.token;
-		$rootScope.currentUser = null;
-		$location.path('/');
+	this.logout = function logout(callback) {
+		var cb = callback || angular.noop;
+
+		/*Session.delete(function(res) {
+			$rootScope.currentUser = null;
+			return cb();
+		},
+		function(err) {
+			return cb(err.data);
+		});*/
+	};
+
+	this.currentUser = function currentUser() {
+		UserFactory.session().get(function(user) {
+			$log.log(user);
+			$rootScope.currentUser = user;
+		});
 	};
 
 }

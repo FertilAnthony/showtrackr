@@ -15,7 +15,6 @@ function DetailController($log, showDetailFactory) {
   });
 
   vm.showDetail = showDetailFactory;
-  $log.log(vm.showDetail);
 
 }
 

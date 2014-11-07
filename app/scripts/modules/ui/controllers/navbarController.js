@@ -3,7 +3,7 @@
 /**
  * @ngInject
  */
-function NavbarController($log, AuthService, $rootScope) {
+function NavbarController($log, AuthService) {
   // ViewModel
   var vm = this;
 
@@ -11,9 +11,9 @@ function NavbarController($log, AuthService, $rootScope) {
 	console.log('test');
 
   vm.logout = function() {
-  	$log.log("pass inside");
+  	$log.log('pass inside');
   	AuthService.logout();
-  }
+  };
 }
 
 module.exports = NavbarController;
